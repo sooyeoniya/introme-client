@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import { GrPowerReset } from "react-icons/gr";
 import { LuCopy } from "react-icons/lu";
 import { AiOutlineInfoCircle } from "react-icons/ai";
@@ -12,7 +12,8 @@ export default function SpellCheck() {
     const [showInfo, setShowInfo] = useState<boolean>(false);
     const [inputText, setInputText] = useState<string>("");
     const [isSpellCheckClicked, setIsSpellCheckClicked] = useState<boolean>(false);
-    const [isSpecialCharactersToggleOn, setIsSpecialCharactersToggleOn] = useState<boolean>(false);
+    const [includeSpaces, setIncludeSpaces] = useState<boolean>(true);
+    const [includeSpecialCharacters, setIncludeSpecialCharacters] = useState<boolean>(false);
     const [specialCharactersCount, setSpecialCharactersCount] = useState<number>(0);
     const [correctionItems, setCorrectionItems] = useState<
         { color: string; textBefore: string; textAfter: string }[]
@@ -22,7 +23,7 @@ export default function SpellCheck() {
         const specialCharactersList = inputText.match(specialCharactersRegex);
         return specialCharactersList ? specialCharactersList : [];
     };
-    const handleInputChange = (e: { target: { value: SetStateAction<string> } }) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setInputText(e.target.value);
     };
     const handleResetCorrectionItems = () => {
@@ -32,7 +33,7 @@ export default function SpellCheck() {
     };
     const handleSpellCheckClick = () => {
         handleResetCorrectionItems();
-        if (isSpecialCharactersToggleOn) {
+        if (includeSpecialCharacters) {
             const specialCharactersList = extractSpecialCharacters();
             const newCorrectionItems = specialCharactersList.map(character => ({
                 color: "blue",
@@ -55,8 +56,13 @@ export default function SpellCheck() {
             console.error("Fail to copy: ", error);
         }
     };
+    const textLength = includeSpaces ? inputText.length : inputText.replace(/ /g, "").length;
+    const textSizeInBytes = new TextEncoder().encode(inputText).length;
+    const handleToggleSpaces = () => {
+        setIncludeSpaces(!includeSpaces);
+    };
     const handleToggleSpecialCharacters = () => {
-        setIsSpecialCharactersToggleOn(!isSpecialCharactersToggleOn);
+        setIncludeSpecialCharacters(!includeSpecialCharacters);
     };
     const handleModifyAllClick = () => {
         setCorrectionItems([]);
@@ -100,7 +106,10 @@ export default function SpellCheck() {
                         <div className="flex gap-4 justify-end items-center">
                             <div className="flex gap-2 justify-end items-center">
                                 <p className="text-xs">공백</p>
-                                <ToggleButton />
+                                <ToggleButton
+                                    includeFunc={includeSpaces}
+                                    handleToggle={handleToggleSpaces}
+                                />
                             </div>
                             <div className="flex gap-2 justify-end items-center">
                                 <div className="relative flex gap-1">
@@ -128,8 +137,8 @@ export default function SpellCheck() {
                                     )}
                                 </div>
                                 <ToggleButton
-                                    includeSpecialCharacters={isSpecialCharactersToggleOn}
-                                    handleToggleSpecialCharacters={handleToggleSpecialCharacters}
+                                    includeFunc={includeSpecialCharacters}
+                                    handleToggle={handleToggleSpecialCharacters}
                                 />
                             </div>
                         </div>
@@ -143,7 +152,7 @@ export default function SpellCheck() {
                             disabled={isSpellCheckClicked}
                         />
                         <p className="flex h-13 text-xs text-zinc-500 justify-end">
-                            0/20000(글자수) | 0/40000(byte)
+                            {textLength}/20000(글자수) | {textSizeInBytes}/40000(byte)
                         </p>
                     </div>
                     {!isSpellCheckClicked && inputText.length === 0 ? (

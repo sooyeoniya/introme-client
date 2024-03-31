@@ -97,10 +97,9 @@ export default function SpellCheck() {
         setSpecialCharactersCount(specialCharactersCount - 1);
     };
     return (
-        <div className="flex flex-col items-center h-screen px-4 pb-4">
-            <div className="w-full p-6 text-center">Header</div>
-            <div className="grid lg:grid-cols-2 sm:grid-cols-1 grid-cols-1 justify-center items-center bg-main-3 bg-opacity-15 w-full h-check-page rounded-xl shadow-main">
-                <div className="flex flex-col w-full h-full py-4 pl-4 pr-2">
+        <div className="relative flex flex-col items-center h-screen mx-4">
+            <div className="absolute bottom-3 w-full h-check-page grid lg:grid-cols-2 sm:grid-cols-1 grid-cols-1 justify-center items-center bg-main-3 bg-opacity-15 rounded-xl shadow-main">
+                <div className="flex flex-col w-full h-full py-3 pl-4 pr-2">
                     <div className="grid grid-cols-2 pt-2 pb-3">
                         <p className="text-lg">원문</p>
                         <div className="flex gap-4 justify-end items-center">
@@ -156,12 +155,12 @@ export default function SpellCheck() {
                         </p>
                     </div>
                     {!isSpellCheckClicked && inputText.length === 0 ? (
-                        <div className="flex w-full pt-4 gap-4 text-sm">
+                        <div className="flex w-full pt-3 gap-4 text-sm">
                             <DisabledButton />
                             <DisabledButton />
                         </div>
                     ) : (
-                        <div className="flex w-full pt-4 gap-4 text-sm">
+                        <div className="flex w-full pt-3 gap-4 text-sm">
                             <ActivatedButton
                                 icon={<GrPowerReset />}
                                 text="초기화"
@@ -175,7 +174,7 @@ export default function SpellCheck() {
                         </div>
                     )}
                 </div>
-                <div className="flex flex-col w-full h-full py-4 pr-4 pl-2 overflow-auto">
+                <div className="flex flex-col w-full h-full py-3 pr-4 pl-2 overflow-auto">
                     <div className="flex flex-row justify-between">
                         <p className="text-lg pt-2 pb-3">교정 결과</p>
                         {isSpellCheckClicked && (
@@ -216,7 +215,7 @@ export default function SpellCheck() {
                             </div>
                         )}
                     </div>
-                    <div className="flex w-full pt-4 justify-between text-sm">
+                    <div className="flex w-full pt-3 justify-between text-sm">
                         <div className="flex items-center pl-2 text-my-red">
                             교정 개수 {specialCharactersCount}개
                         </div>

@@ -19,7 +19,7 @@ export default {
                 toggle: "0px 4px 3px -2px rgb(0 0 0 / 0.2)"
             },
             height: {
-                "check-page": "91.1%"
+                "check-page": "89%"
             },
             backgroundColor: ["disabled"]
         },

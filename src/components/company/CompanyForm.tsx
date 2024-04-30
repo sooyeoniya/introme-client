@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CompanyProps, Talent } from "../../types/company";
+import CompanyInput from "./CompanyInput";
+import CompanyTalentInput from "./CompanyTalentInput";
 
 export default function CompanyForm() {
     const navigate = useNavigate();
@@ -76,111 +78,63 @@ export default function CompanyForm() {
     };
     return (
         <form className="space-y-8" onSubmit={handleSubmit}>
-            <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                    <label htmlFor="companyName" className="block font-GmarketSansBold text-xl">
-                        기업명
-                        <span className="text-[#EA3323] font-GmarketSansMedium text-xs ml-2">
-                            *
-                        </span>
-                    </label>
-                    <span className="text-[#EA3323] text-xs">*필수</span>
-                </div>
-                <input
+            <div className="relative">
+                <CompanyInput
                     id="companyName"
-                    type="text"
-                    required
-                    className="text-xs max-w-lg w-full bg-[#F1F3F5] rounded-lg py-4 px-5 placeholder:text[#ADB5BD] placeholder:text-xs"
+                    name="name"
+                    label="기업명"
+                    required={true}
                     placeholder="인트로미"
                     maxLength={20}
                     value={company.name}
-                    onChange={e => handleChange("name", e.target.value)}
+                    onChange={handleChange}
                 />
+                <span className="absolute top-0 right-0 text-[#EA3323] text-xs">*필수</span>
             </div>
-            <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                    <label htmlFor="companyAddress" className="block font-GmarketSansBold text-xl">
-                        기업 주소
-                        <span className="text-[#EA3323] font-GmarketSansMedium text-xs ml-2">
-                            *
-                        </span>
-                    </label>
-                </div>
-                <input
-                    id="companyAddress"
-                    type="text"
-                    required
-                    className="text-xs max-w-lg w-full bg-[#F1F3F5] rounded-lg py-4 px-5 placeholder:text[#ADB5BD] placeholder:text-xs"
-                    placeholder="예시) 서울특별시 강남구"
-                    maxLength={20}
-                    value={company.companyInfo.location}
-                    onChange={e => handleChange("location", e.target.value, "companyInfo")}
-                />
-            </div>
-            <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                    <label htmlFor="companyWebsite" className="block font-GmarketSansBold text-xl">
-                        웹사이트 주소
-                        <span className="text-[#EA3323] font-GmarketSansMedium text-xs ml-2">
-                            *
-                        </span>
-                    </label>
-                </div>
-                <div className="flex items-center">
-                    <span className="text-xs absolute text-[#666666] ml-5">https://</span>
-                    <input
-                        id="companyWebsite"
-                        type="text"
-                        required
-                        className="text-xs max-w-lg w-full bg-[#F1F3F5] rounded-lg py-4 pr-5 pl-20 placeholder:text[#ADB5BD] placeholder:text-xs"
-                        placeholder="www.introme.com"
-                        maxLength={70}
-                        value={company.companyInfo.url}
-                        onChange={e => handleChange("url", e.target.value, "companyInfo")}
-                    />
-                </div>
-            </div>
-            <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                    <label
-                        htmlFor="companyEmployment"
-                        className="block font-GmarketSansBold text-xl"
-                    >
-                        채용사이트 주소
-                    </label>
-                </div>
-                <div className="flex items-center">
-                    <span className="text-xs absolute text-[#666666] ml-5">https://</span>
-                    <input
-                        id="companyEmployment"
-                        type="text"
-                        className="text-xs max-w-lg w-full bg-[#F1F3F5] rounded-lg py-4 pr-5 pl-20 placeholder:text[#ADB5BD] placeholder:text-xs"
-                        placeholder="www.introme.com"
-                        maxLength={70}
-                        value={company.companyInfo.recruitUrl}
-                        onChange={e => handleChange("recruitUrl", e.target.value, "companyInfo")}
-                    />
-                </div>
-            </div>
-            <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                    <label htmlFor="companyBlog" className="block font-GmarketSansBold text-xl">
-                        테크블로그 주소
-                    </label>
-                </div>
-                <div className="flex items-center">
-                    <span className="text-xs absolute text-[#666666] ml-5">https://</span>
-                    <input
-                        id="companyBlog"
-                        type="text"
-                        className="text-xs max-w-lg w-full bg-[#F1F3F5] rounded-lg py-4 pr-5 pl-20 placeholder:text[#ADB5BD] placeholder:text-xs"
-                        placeholder="www.introme.com"
-                        maxLength={70}
-                        value={company.companyInfo.techBlog}
-                        onChange={e => handleChange("techBlog", e.target.value, "companyInfo")}
-                    />
-                </div>
-            </div>
+            <CompanyInput
+                id="companyAddress"
+                name="location"
+                label="기업 주소"
+                required={true}
+                placeholder="예시) 서울특별시 강남구"
+                maxLength={20}
+                value={company.companyInfo.location}
+                onChange={handleChange}
+                context="companyInfo"
+            />
+            <CompanyInput
+                id="companyWebsite"
+                name="url"
+                label="웹사이트 주소"
+                required={true}
+                placeholder="www.introme.com"
+                maxLength={70}
+                value={company.companyInfo.url}
+                onChange={handleChange}
+                context="companyInfo"
+            />
+            <CompanyInput
+                id="companyEmployment"
+                name="recruitUrl"
+                label="채용사이트 주소"
+                required={false}
+                placeholder="www.introme.com"
+                maxLength={70}
+                value={company.companyInfo.recruitUrl}
+                onChange={handleChange}
+                context="companyInfo"
+            />
+            <CompanyInput
+                id="companyBlog"
+                name="techBlog"
+                label="테크블로그 주소"
+                required={false}
+                placeholder="www.introme.com"
+                maxLength={70}
+                value={company.companyInfo.techBlog}
+                onChange={handleChange}
+                context="companyInfo"
+            />
             <div>
                 <div className="flex flex-col justify-between ">
                     <label htmlFor="companyTalent" className="block font-GmarketSansBold text-xl">
@@ -196,59 +150,13 @@ export default function CompanyForm() {
                     </div>
                 </div>
                 {company.talents.map((talent, index) => (
-                    <div
+                    <CompanyTalentInput
                         key={talent.id}
-                        className="bg-[#F1F3F5] max-w-lg w-full flex flex-col px-2 py-3 space-y-3 rounded-lg mb-2"
-                    >
-                        <div className="flex items-center justify-between">
-                            <span className="text-xs">{index + 1}번째 인재상</span>
-                            {index > 0 && (
-                                <button
-                                    type="button"
-                                    className="text-sm"
-                                    onClick={() => handleRemoveTalent(talent.id)}
-                                >
-                                    x
-                                </button>
-                            )}
-                        </div>
-                        <div className="flex items-center">
-                            <span className="text-xs absolute text-[#666666] ml-5">키워드</span>
-                            <input
-                                type="text"
-                                required
-                                className="text-xs w-full bg-white rounded-lg py-4 pr-5 pl-20 placeholder:text[#ADB5BD] placeholder:text-xs"
-                                placeholder="예시) 사회적 책임감"
-                                maxLength={20}
-                                value={talent.keyword}
-                                onChange={e => handleTalentChange(index, "keyword", e.target.value)}
-                            />
-                        </div>
-                        <div className="flex items-center">
-                            <span className="text-xs absolute text-[#666666] ml-5">설명</span>
-                            <input
-                                type="text"
-                                required
-                                className="text-xs w-full bg-white rounded-lg py-4 pr-5 pl-20 placeholder:text[#ADB5BD] placeholder:text-xs"
-                                placeholder="예시) 보다 나은 세상을 만들기 위해 노력합니다."
-                                value={talent.description}
-                                onChange={e =>
-                                    handleTalentChange(index, "description", e.target.value)
-                                }
-                            />
-                        </div>
-                        <div className="flex items-center">
-                            <span className="text-xs absolute text-[#666666] ml-5">URL</span>
-                            <input
-                                type="text"
-                                required
-                                className="text-xs w-full bg-white rounded-lg py-4 pr-5 pl-20 placeholder:text[#ADB5BD] placeholder:text-xs"
-                                placeholder="www.introme.com"
-                                value={talent.baseUrl}
-                                onChange={e => handleTalentChange(index, "baseUrl", e.target.value)}
-                            />
-                        </div>
-                    </div>
+                        index={index}
+                        talent={talent}
+                        handleTalentChange={handleTalentChange}
+                        handleRemoveTalent={handleRemoveTalent}
+                    />
                 ))}
                 <button
                     type="button"

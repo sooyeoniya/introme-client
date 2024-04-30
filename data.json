@@ -1157,6 +1157,31 @@
       "recruitUrl": "ㅁ",
       "techBlog": "ㅁ",
       "id": 5
+    },
+    {
+      "name": "ㅇㄴㅁ",
+      "image": "이미지.png",
+      "companyInfo": {
+        "location": "ㅇㄴㅁ",
+        "url": "ㅇㄴㅁ",
+        "recruitUrl": "ㅇㅁㅇㄴㅁㅇㄴㅁ",
+        "techBlog": ""
+      },
+      "talents": [
+        {
+          "id": 1,
+          "keyword": "ㅇㄴㅁ",
+          "description": "ㅇㄴㅁ",
+          "baseUrl": "ㅇㄴㅁ"
+        },
+        {
+          "id": 2,
+          "keyword": "ㅇㄴㅁ",
+          "description": "ㅇㄴㅁ",
+          "baseUrl": "ㅇㄴㅁ"
+        }
+      ],
+      "id": 6
     }
   ]
 }

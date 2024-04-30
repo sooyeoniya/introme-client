@@ -4,6 +4,7 @@ export interface Talent {
     description: string;
     baseUrl?: string;
     icon?: string;
+    [key: string]: string | undefined | number;
 }
 
 export interface CompanyInfo {

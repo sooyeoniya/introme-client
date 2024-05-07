@@ -12,7 +12,7 @@ export default function SpellCheck() {
     const [showInfo, setShowInfo] = useState<boolean>(false);
     const [inputText, setInputText] = useState<string>("");
     const [isSpellCheckClicked, setIsSpellCheckClicked] = useState<boolean>(false);
-    const [includeSpaces, setIncludeSpaces] = useState<boolean>(true);
+    const [includeSpaces, setIncludeSpaces] = useState<boolean>(false);
     const [includeSpecialCharacters, setIncludeSpecialCharacters] = useState<boolean>(false);
     const [specialCharactersCount, setSpecialCharactersCount] = useState<number>(0);
     const [correctionItems, setCorrectionItems] = useState<

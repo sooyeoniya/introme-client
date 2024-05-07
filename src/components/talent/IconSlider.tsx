@@ -26,11 +26,7 @@ export default function IconSlider() {
                 }}
             >
                 {duplicatedSlides.map((slide, index) => (
-                    <div
-                        key={index}
-                        className="flex-shrink-0"
-                        style={{ width: `${200 / duplicatedSlides.length}%` }}
-                    >
+                    <div key={index} className="flex-shrink-0 w-[5%]">
                         <div className="bg-white rounded-full flex w-32 h-32 justify-center items-center">
                             <img
                                 src={slide.icon}

@@ -7,13 +7,21 @@ interface Slide {
     icon: string;
 }
 
-const slides: Slide[] = [{ icon: smileIcon }, { icon: logo }, { icon: react }];
+const slides: Slide[] = [{ icon: smileIcon }, { icon: logo }, { icon: react }, { icon: logo }];
 
 export default function IconSlider() {
     const num = Math.trunc(40 / slides.length);
     const duplicatedSlides = Array.from({ length: num }, () => slides).flat();
     return (
-        <div className="py-32 overflow-hidden mx-auto w-5/6 flex">
+        <div
+            className="py-32 overflow-hidden mx-auto w-5/6 flex"
+            style={{
+                maskImage:
+                    "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+                WebkitMaskImage:
+                    "linear-gradient(to right, transparent, black 10%, black 90%, transparent)"
+            }}
+        >
             <motion.div
                 className="flex"
                 animate={{

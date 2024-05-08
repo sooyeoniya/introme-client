@@ -1,7 +1,7 @@
 import NavigationLinksButton from "../buttons/NavigationLinksButton.tsx";
 import reactIcon from "../../assets/react.svg";
-import IconSlider from "./IconSlider.tsx";
-export default function Banner() {
+import TalentIconSlider from "./TalentIconSlider.tsx";
+export default function TalentBanner() {
     return (
         <div className="bg-my-gray pt-28 px-9 pb-8">
             <div className="flex flex-col">
@@ -24,7 +24,7 @@ export default function Banner() {
                     </div>
                 </div>
                 <div className="pl-36">서울특별시 구로구 디지털로30길 28, 609호</div>
-                <IconSlider />
+                <TalentIconSlider />
                 <div className="flex gap-3 pl-12">
                     <NavigationLinksButton text="웹 사이트" isBlue={true} />
                     <NavigationLinksButton text="채용 사이트" />

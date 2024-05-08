@@ -9,7 +9,7 @@ interface Slide {
 
 const slides: Slide[] = [{ icon: smileIcon }, { icon: logo }, { icon: react }, { icon: logo }];
 
-export default function IconSlider() {
+export default function TalentIconSlider() {
     const num = Math.trunc(40 / slides.length);
     const duplicatedSlides = Array.from({ length: num }, () => slides).flat();
     return (
@@ -39,6 +39,7 @@ export default function IconSlider() {
                             <img
                                 src={slide.icon}
                                 className="flex items-center justify-center h-16 w-16"
+                                alt="icon"
                             />
                         </div>
                     </div>

@@ -1,15 +1,11 @@
-import smileIcon from "../../assets/smile.png";
-import react from "../../assets/react.svg";
-import logo from "../../assets/IntroMeLogo.png";
 import { motion } from "framer-motion";
 
-interface Slide {
-    icon: string;
-}
+type TalentIconSliderProps = {
+    talents: { icon: string }[];
+};
 
-const slides: Slide[] = [{ icon: smileIcon }, { icon: logo }, { icon: react }, { icon: logo }];
-
-export default function TalentIconSlider() {
+export default function TalentIconSlider({ talents }: TalentIconSliderProps) {
+    const slides = talents.map(talent => ({ icon: talent.icon }));
     const num = Math.trunc(40 / slides.length);
     const duplicatedSlides = Array.from({ length: num }, () => slides).flat();
     return (

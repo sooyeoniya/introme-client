@@ -3,7 +3,7 @@ import TalentIconSlider from "./TalentIconSlider.tsx";
 import { useEffect, useState } from "react";
 export default function TalentBanner() {
     // @ts-ignore
-    const [companyData, setCompanyData] = useState<>(null);
+    const [companyData, setCompanyData] = useState<any>(null);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -15,7 +15,7 @@ export default function TalentBanner() {
                 });
                 const data = await response.json();
                 console.log(data);
-                //setCompanyData(data);
+                setCompanyData(data);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -25,11 +25,11 @@ export default function TalentBanner() {
 
     if (!companyData) return <div>Loading...</div>;
 
-    const { name, image, backgroundColor, companyInfo, updatedAt, talents } = companyData;
+    const { name, image, identityColor, companyInfo, updatedAt, talents } = companyData;
     const { location, url, recruitUrl, techBlog } = companyInfo;
 
     return (
-        <div className={`bg-${backgroundColor ?? "my-gray"} pt-28 px-9 pb-8`}>
+        <div className={`bg-[${identityColor}] pt-28 px-9 pb-8`}>
             <div className="flex flex-col">
                 <div className="flex justify-between">
                     <div className="flex pt-10 pr-4 w-36 justify-end">

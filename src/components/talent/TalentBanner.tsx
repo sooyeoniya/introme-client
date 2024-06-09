@@ -1,9 +1,34 @@
 import NavigationLinksButton from "../buttons/NavigationLinksButton.tsx";
 import TalentIconSlider from "./TalentIconSlider.tsx";
 import { useEffect, useState } from "react";
+
+interface CompanyInfo {
+    location: string;
+    url: string;
+    recruitUrl: string;
+    techBlog: string;
+}
+
+interface Talent {
+    id: number;
+    keyword: string;
+    description: string;
+    icon: string;
+    permission: string;
+    baseUrl: string;
+}
+
+interface CompanyData {
+    name: string;
+    image: string;
+    identityColor: string;
+    companyInfo: CompanyInfo;
+    updatedAt: string;
+    talents: Talent[];
+}
+
 export default function TalentBanner() {
-    // @ts-ignore
-    const [companyData, setCompanyData] = useState<any>(null);
+    const [companyData, setCompanyData] = useState<CompanyData | null>(null);
     useEffect(() => {
         const fetchData = async () => {
             try {

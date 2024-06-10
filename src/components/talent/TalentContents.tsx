@@ -1,11 +1,14 @@
-import smileIcon from "../../assets/smile.png";
 import { motion, Variants } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 interface TalentItems {
-    icon: string;
+    id: number;
     keyword: string;
     description: string;
+    icon: string;
+    permission: string;
+    baseUrl: string;
 }
 
 const cardVariants: Variants = {
@@ -22,65 +25,31 @@ const cardVariants: Variants = {
     }
 };
 
-const talentData: TalentItems[] = [
-    {
-        icon: smileIcon,
-        keyword: "혁신",
-        description: "가보지 않은 길을 두려워하지 않습니다"
-    },
-    {
-        icon: smileIcon,
-        keyword: "본질 추구",
-        description: "남들이 당연시 생각하는 것이라도 본질에 대해서 생각합니다"
-    },
-    {
-        icon: smileIcon,
-        keyword: "신뢰",
-        description: "동료에 대한 신뢰와 존중을 기반으로 토론합니다"
-    },
-    {
-        icon: smileIcon,
-        keyword: "주도성",
-        description: "스스로 몰입하고 주도적으로 일합니다"
-    },
-    {
-        icon: smileIcon,
-        keyword: "사회적 책임감",
-        description: "보다 나은 세상을 만들기 위해 노력합니다"
-    },
-    {
-        icon: smileIcon,
-        keyword: "혁신",
-        description: "가보지 않은 길을 두려워하지 않습니다"
-    },
-    {
-        icon: smileIcon,
-        keyword: "본질 추구",
-        description: "남들이 당연시 생각하는 것이라도 본질에 대해서 생각합니다"
-    },
-    {
-        icon: smileIcon,
-        keyword: "신뢰",
-        description: "동료에 대한 신뢰와 존중을 기반으로 토론합니다"
-    },
-    {
-        icon: smileIcon,
-        keyword: "주도성",
-        description: "스스로 몰입하고 주도적으로 일합니다"
-    },
-    {
-        icon: smileIcon,
-        keyword: "사회적 책임감",
-        description: "보다 나은 세상을 만들기 위해 노력합니다"
-    }
-];
-
 export default function TalentContents() {
+    const [talentData, setTalentData] = useState<TalentItems[] | null>(null);
     useEffect(() => {
         window.onbeforeunload = function pushRefresh() {
             window.scrollTo(0, 0);
         };
     }, []);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await axios.get("/api/v1/company/talent/2", {
+                    headers: {
+                        Accept: "application/json"
+                    },
+                    withCredentials: true
+                });
+                setTalentData(response.data.talents);
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        })();
+    }, []);
+
+    if (!talentData) return <div>Loading...</div>;
 
     return (
         <div className="px-20 pt-36 flex justify-between">

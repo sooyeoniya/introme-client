@@ -1,6 +1,7 @@
 import NavigationLinksButton from "../buttons/NavigationLinksButton.tsx";
 import TalentIconSlider from "./TalentIconSlider.tsx";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 interface CompanyInfo {
     location: string;
@@ -30,22 +31,19 @@ interface CompanyData {
 export default function TalentBanner() {
     const [companyData, setCompanyData] = useState<CompanyData | null>(null);
     useEffect(() => {
-        const fetchData = async () => {
+        (async () => {
             try {
-                const response = await fetch("/api/v1/company/talent/2", {
+                const response = await axios.get("/api/v1/company/talent/2", {
                     headers: {
                         Accept: "application/json"
                     },
-                    method: "GET"
+                    withCredentials: true
                 });
-                const data = await response.json();
-                console.log(data);
-                setCompanyData(data);
+                setCompanyData(response.data);
             } catch (error) {
-                console.error("Error fetching data:", error);
+                console.error("Error:", error);
             }
-        };
-        fetchData();
+        })();
     }, []);
 
     if (!companyData) return <div>Loading...</div>;
@@ -67,6 +65,7 @@ export default function TalentBanner() {
                             <div className="content-end text-xl font-GmarketSansBold">
                                 기업 인재상
                             </div>
+                            {/* TODO: 인재상 추가 페이지 연결 */}
                             <NavigationLinksButton text="인재상 추가" url="#" />
                         </div>
                         <div className="h-20 text-6xl content-center font-GmarketSansBold">

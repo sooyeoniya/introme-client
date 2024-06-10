@@ -1,7 +1,5 @@
 import NavigationLinksButton from "../buttons/NavigationLinksButton.tsx";
 import TalentIconSlider from "./TalentIconSlider.tsx";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
 interface CompanyInfo {
     location: string;
@@ -28,26 +26,11 @@ interface CompanyData {
     talents: Talent[];
 }
 
-export default function TalentBanner() {
-    const [companyData, setCompanyData] = useState<CompanyData | null>(null);
-    useEffect(() => {
-        (async () => {
-            try {
-                const response = await axios.get("/api/v1/company/talent/2", {
-                    headers: {
-                        Accept: "application/json"
-                    },
-                    withCredentials: true
-                });
-                setCompanyData(response.data);
-            } catch (error) {
-                console.error("Error:", error);
-            }
-        })();
-    }, []);
+interface TalentBannerProps {
+    companyData: CompanyData;
+}
 
-    if (!companyData) return <div>Loading...</div>;
-
+export default function TalentBanner({ companyData }: TalentBannerProps) {
     const { name, image, identityColor, companyInfo, updatedAt, talents } = companyData;
     const { location, url, recruitUrl, techBlog } = companyInfo;
 

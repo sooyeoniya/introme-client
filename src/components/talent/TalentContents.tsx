@@ -1,6 +1,5 @@
 import { motion, Variants } from "framer-motion";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect } from "react";
 
 interface TalentItems {
     id: number;
@@ -9,6 +8,10 @@ interface TalentItems {
     icon: string;
     permission: string;
     baseUrl: string;
+}
+
+interface TalentContentsProps {
+    talentData: TalentItems[];
 }
 
 const cardVariants: Variants = {
@@ -25,31 +28,12 @@ const cardVariants: Variants = {
     }
 };
 
-export default function TalentContents() {
-    const [talentData, setTalentData] = useState<TalentItems[] | null>(null);
+export default function TalentContents({ talentData }: TalentContentsProps) {
     useEffect(() => {
         window.onbeforeunload = function pushRefresh() {
             window.scrollTo(0, 0);
         };
     }, []);
-
-    useEffect(() => {
-        (async () => {
-            try {
-                const response = await axios.get("/api/v1/company/talent/2", {
-                    headers: {
-                        Accept: "application/json"
-                    },
-                    withCredentials: true
-                });
-                setTalentData(response.data.talents);
-            } catch (error) {
-                console.error("Error:", error);
-            }
-        })();
-    }, []);
-
-    if (!talentData) return <div>Loading...</div>;
 
     return (
         <div className="px-20 pt-36 flex justify-between">

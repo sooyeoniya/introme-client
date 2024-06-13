@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useRef, useState, ReactNode } from "react";
-import { ScrollContextType, SectionRefs } from "../types/main";
+import { ScrollContextType, SectionRefs } from "../types/scroll";
 
 const ScrollContext = createContext<ScrollContextType | undefined>(undefined);
 

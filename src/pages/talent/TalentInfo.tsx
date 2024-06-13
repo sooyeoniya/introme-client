@@ -2,7 +2,7 @@ import TalentBanner from "../../components/talent/TalentBanner.tsx";
 import TalentContents from "../../components/talent/TalentContents.tsx";
 import TalentFooter from "../../components/talent/TalentFooter.tsx";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { CompanyAPI } from "../../apis/Company.ts";
 
 interface CompanyInfo {
     location: string;
@@ -34,13 +34,8 @@ export default function TalentInfo() {
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get("/api/v1/company/talent/2", {
-                    headers: {
-                        Accept: "application/json"
-                    },
-                    withCredentials: true
-                });
-                setCompanyData(response.data);
+                const data = await CompanyAPI.getCompanyTalentInfo("2"); // TODO: 기업 인재상 리스트 페이지에서 CompanyId 넘겨받기
+                setCompanyData(data);
             } catch (error) {
                 console.error("Error:", error);
             }

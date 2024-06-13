@@ -1,4 +1,4 @@
-import NavigationLinksButton from "../buttons/NavigationLinksButton.tsx";
+import NavigationLinksButton from "./buttons/NavigationLinksButton.tsx";
 import TalentIconSlider from "./TalentIconSlider.tsx";
 
 interface CompanyInfo {

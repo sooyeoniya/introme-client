@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Main from "../pages/Main";
+import Main from "../pages/main/Main.tsx";
 import SpellCheck from "../pages/check/SpellCheck";
 import Layout from "./Layout";
 import TalentInfo from "../pages/talent/TalentInfo.tsx";

@@ -1,5 +1,5 @@
 import { FaArrowRight } from "react-icons/fa";
-import ModifyButton from "../buttons/ModifyButton.tsx";
+import ModifyButton from "./buttons/ModifyButton.tsx";
 
 type CorrectionItemProps = {
     color: string;

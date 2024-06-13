@@ -1,18 +1,6 @@
 import { motion, Variants } from "framer-motion";
 import { useEffect } from "react";
-
-interface TalentItems {
-    id: number;
-    keyword: string;
-    description: string;
-    icon: string;
-    permission: string;
-    baseUrl: string;
-}
-
-interface TalentContentsProps {
-    talentData: TalentItems[];
-}
+import { TalentContentsProps } from "../../types/talent";
 
 const cardVariants: Variants = {
     offscreen: {

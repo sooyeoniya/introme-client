@@ -1,8 +1,5 @@
 import { motion } from "framer-motion";
-
-type TalentIconSliderProps = {
-    talents: { icon: string }[];
-};
+import { TalentIconSliderProps } from "../../types/talent";
 
 export default function TalentIconSlider({ talents }: TalentIconSliderProps) {
     const slides = talents.map(talent => ({ icon: talent.icon }));

@@ -1,8 +1,5 @@
-type NavigationLinksBtnProps = {
-    text: string;
-    isBlue?: boolean;
-    url?: string | null;
-};
+import { NavigationLinksBtnProps } from "../../../types/talent";
+
 export default function NavigationLinksButton({ text, isBlue, url }: NavigationLinksBtnProps) {
     if (!url) return null;
     const formattedUrl =

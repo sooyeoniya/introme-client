@@ -3,31 +3,7 @@ import TalentContents from "../../components/talent/TalentContents.tsx";
 import TalentFooter from "../../components/talent/TalentFooter.tsx";
 import { useEffect, useState } from "react";
 import { CompanyAPI } from "../../apis/Company.ts";
-
-interface CompanyInfo {
-    location: string;
-    url: string;
-    recruitUrl: string;
-    techBlog: string;
-}
-
-interface Talent {
-    id: number;
-    keyword: string;
-    description: string;
-    icon: string;
-    permission: string;
-    baseUrl: string;
-}
-
-interface CompanyData {
-    name: string;
-    image: string;
-    identityColor: string;
-    companyInfo: CompanyInfo;
-    updatedAt: string;
-    talents: Talent[];
-}
+import { CompanyData } from "../../types/talent";
 
 export default function TalentInfo() {
     const [companyData, setCompanyData] = useState<CompanyData | null>(null);

@@ -1,29 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-
-interface CompanyInfo {
-    location: string;
-    url: string;
-    recruitUrl: string;
-    techBlog: string;
-}
-
-interface Talent {
-    id: number;
-    keyword: string;
-    description: string;
-    icon: string;
-    permission: string;
-    baseUrl: string;
-}
-
-interface CompanyData {
-    name: string;
-    image: string;
-    identityColor: string;
-    companyInfo: CompanyInfo;
-    updatedAt: string;
-    talents: Talent[];
-}
+import { CompanyData } from "../types/talent";
 
 export class CompanyAPI {
     static instance: AxiosInstance = axios.create({

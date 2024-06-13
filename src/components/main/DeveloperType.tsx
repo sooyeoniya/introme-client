@@ -1,11 +1,5 @@
-import { DeveloperProfileProps } from "../../types/main";
 import DeveloperProfile from "./DeveloperProfile";
-
-interface DeveloperTypeProps {
-    title: string;
-    profiles: DeveloperProfileProps[];
-    children: React.ReactNode;
-}
+import { DeveloperTypeProps } from "../../types/main";
 
 export default function DeveloperType({ title, profiles, children }: DeveloperTypeProps) {
     return (

@@ -1,34 +1,6 @@
 import NavigationLinksButton from "./buttons/NavigationLinksButton.tsx";
 import TalentIconSlider from "./TalentIconSlider.tsx";
-
-interface CompanyInfo {
-    location: string;
-    url: string;
-    recruitUrl: string;
-    techBlog: string;
-}
-
-interface Talent {
-    id: number;
-    keyword: string;
-    description: string;
-    icon: string;
-    permission: string;
-    baseUrl: string;
-}
-
-interface CompanyData {
-    name: string;
-    image: string;
-    identityColor: string;
-    companyInfo: CompanyInfo;
-    updatedAt: string;
-    talents: Talent[];
-}
-
-interface TalentBannerProps {
-    companyData: CompanyData;
-}
+import { TalentBannerProps } from "../../types/talent";
 
 export default function TalentBanner({ companyData }: TalentBannerProps) {
     const { name, image, identityColor, companyInfo, updatedAt, talents } = companyData;

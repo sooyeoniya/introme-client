@@ -8,7 +8,10 @@ export default function CompanyCard({ id, image, location, url, name, talents }:
         event.stopPropagation();
     };
     return (
-        <Link to={""} className="border border-[#EAEBEC] rounded-2xl cursor-pointer">
+        <Link
+            to={`/company/talent/${id}`}
+            className="border border-[#EAEBEC] rounded-2xl cursor-pointer"
+        >
             <div className="p-6">
                 <div className="flex  items-center">
                     <div className="bg-slate-500 w-[60px] h-[60px] mr-3" />

@@ -14,7 +14,7 @@ export default function Router() {
                 <Route path="/check" element={<SpellCheck />} />
                 <Route path="/company/list" element={<CompanyList />} />
                 <Route path="/company/add" element={<CompanyAdd />} />
-                <Route path="/talent" element={<TalentInfo />} />
+                <Route path="/company/talent/:companyId" element={<TalentInfo />} />
             </Route>
         </Routes>
     );

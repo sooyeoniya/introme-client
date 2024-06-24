@@ -4,7 +4,7 @@ import { IoSearch } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 interface CompanyHeaderProps {
-    totalElements: number;
+    totalElements: number | undefined;
 }
 
 export default function CompanyHeader({ totalElements }: CompanyHeaderProps) {

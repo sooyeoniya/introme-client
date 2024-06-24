@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { CompanyProps, Talent } from "../../types/company";
 import CompanyInput from "./CompanyInput";
 import CompanyTalentInput from "./CompanyTalentInput";
+import { CompanyAPI } from "../../apis/Company";
 
 export default function CompanyForm() {
     const navigate = useNavigate();
@@ -22,16 +23,7 @@ export default function CompanyForm() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:4000/add", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(company)
-            });
-            if (!response.ok) {
-                throw new Error("에러");
-            }
+            await CompanyAPI.createCompany(company);
             navigate("/company/list");
         } catch (error: any) {
             console.error("Error:", error);

@@ -5,6 +5,7 @@ import CompanyHeader from "../../components/company/CompanyHeader";
 import Loader from "../../components/Loader";
 import { CompanyCardProps } from "../../types/company";
 import Loading from "../../components/Loading";
+import { CompanyAPI } from "../../apis/Company";
 
 export default function CompanyList() {
     // 관찰하려는 DOM 요소
@@ -12,33 +13,9 @@ export default function CompanyList() {
     // Intersection Observer 인스턴스에 대한 참조
     const intersectionObserver = useRef<IntersectionObserver | null>(null);
 
-    const fetchCompanies = async (pageParam = 1) => {
-        const response = await fetch(`http://localhost:4000/company?_page=${pageParam}&_limit=12`);
-        if (!response.ok) {
-            throw new Error("에러");
-        }
-        const data = await response.json();
-
-        const totalCountHeader = response.headers.get("X-Total-Count");
-        const totalCount = totalCountHeader ? parseInt(totalCountHeader, 10) : 0;
-        const totalPages = Math.ceil(totalCount / 12);
-
-        return { data, totalPages, page: pageParam };
-    };
-
-    const fetchPageInfo = async () => {
-        const response = await fetch(`http://localhost:4000/pageInfo`);
-        if (!response.ok) {
-            throw new Error("에러");
-        }
-        const totalElements = await response.json();
-
-        return { totalElements };
-    };
-
     const { data: pageInfo } = useQuery({
         queryKey: ["pageInfo"],
-        queryFn: fetchPageInfo
+        queryFn: CompanyAPI.fetchPageInfo
     });
 
     const {
@@ -50,7 +27,7 @@ export default function CompanyList() {
         isLoading
     } = useInfiniteQuery({
         queryKey: ["companies"],
-        queryFn: ({ pageParam = 1 }) => fetchCompanies(pageParam),
+        queryFn: ({ pageParam = 1 }) => CompanyAPI.fetchCompanies(pageParam),
         initialPageParam: 1,
         getNextPageParam: lastPage =>
             lastPage.page < lastPage.totalPages ? lastPage.page + 1 : undefined
@@ -95,7 +72,7 @@ export default function CompanyList() {
 
     return (
         <div className="pt-[86px] px-20">
-            <CompanyHeader totalElements={pageInfo?.totalElements.totalElements} />
+            <CompanyHeader totalElements={pageInfo?.totalElements} />
             <div className="pt-11">
                 <div className="grid grid-cols-3 gap-x-8 gap-y-5">
                     {companies?.pages.map((page, index) => (
